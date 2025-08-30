@@ -164,7 +164,7 @@ function renderVolume(value) {
 }
 
 function renderCurrentTrack(trackName) {
-  const cleanTrackName = trackName.replace(/\.[^/.]+$/, '');
+  const cleanTrackName = (trackName ?? '').replace(/\.[^/.]+$/, '');
   trackNameEl.textContent = cleanTrackName;
   trackNameDupEl.textContent = cleanTrackName;
 
