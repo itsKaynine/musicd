@@ -1,0 +1,157 @@
+<!doctype html>
+<html class="sl-theme-dark">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=no" name="viewport">
+    <title>musicd</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/themes/dark.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script type="module"
+        src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace-autoloader.js"></script>
+</head>
+
+<body>
+    <main id="app">
+        <h1>🎶 musicd</h1>
+        <div class="player-container">
+            <div class="player">
+                <!-- Info -->
+                <div class="player-info">
+                    <div class="track-name-container">
+                        <div id="track-name-marquee">
+                            <span id="track-name">-</span>
+                            <span id="track-name-dup"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Track position -->
+                <sl-range id="seek" min="0" value="0"></sl-range>
+                <div class="time">
+                    <span id="current">0:00</span>
+                    <span id="duration">0:00</span>
+                </div>
+
+                <!-- Controls -->
+                <div class="controls">
+                    <sl-button id="prev" circle>
+                        <sl-icon name="skip-backward"></sl-icon>
+                    </sl-button>
+                    <sl-button id="play" circle variant="primary">
+                        <sl-icon name="pause-fill"></sl-icon>
+                    </sl-button>
+                    <sl-button id="next" circle>
+                        <sl-icon name="skip-forward"></sl-icon>
+                    </sl-button>
+                </div>
+
+                <!-- Volume -->
+                <div class="volume-controls">
+                    <sl-icon name="volume-off"></sl-icon></span>
+                    <sl-range id="volume" min="0" max="1" step="0.01" value="1"></sl-range>
+                    <sl-icon name="volume-up"></sl-icon></span>
+                </div>
+
+            </div>
+        </div>
+
+        <div style="margin-top: 20px; margin-bottom: 20px;"></div>
+
+        <!-- Tabs -->
+        <sl-tab-group class="tabs">
+            <sl-tab slot="nav" panel="tracks">
+                Tracks
+            </sl-tab>
+            <sl-tab slot="nav" panel="playlists">
+                Playlists
+            </sl-tab>
+            <sl-tab slot="nav" panel="publish">
+                Publish
+            </sl-tab>
+            <sl-tab slot="nav" panel="advanced">
+                Advanced
+            </sl-tab>
+
+            <!-- Tracks -->
+            <sl-tab-panel name="tracks">
+                <div class="tab-panel-header">
+                    <div id="tracks-playlist-name" style="font-size: 12px">
+                        Playlist: -
+                    </div>
+                    <sl-button id="refresh-tracks" size="small">
+                        Refresh <sl-icon name="arrow-clockwise"></sl-icon>
+                    </sl-button>
+                </div>
+
+                <div class="table-container">
+                    <table id="tracks-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 20px;">#</th>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tracks-tbody"></tbody>
+                    </table>
+                </div>
+            </sl-tab-panel>
+
+            <!-- Playlists -->
+            <sl-tab-panel name="playlists">
+                <div class="tab-panel-header">
+                    <div id="playlists-playlist-name" style="font-size: 12px">
+                        Playlist: -
+                    </div>
+                    <sl-button id="refresh-playlists" size="small">
+                        Refresh <sl-icon name="arrow-clockwise"></sl-icon>
+                    </sl-button>
+                </div>
+
+                <div class="table-container">
+                    <table id="playlists-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 20px;">#</th>
+                                <th>Name</th>
+                                <th style="width: 78px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="playlists-tbody"></tbody>
+                    </table>
+                </div>
+            </sl-tab-panel>
+
+            <!-- Publish -->
+            <sl-tab-panel name="publish">
+                <sl-alert id="publish-alert" variant="primary" duration="10000" countdown="rtl" closable>
+                    <sl-icon slot="icon" name="info-circle"></sl-icon>
+                    <span>Accepted! Downloading in background…</span>
+                </sl-alert>
+                <div class="publish-form">
+                    <sl-input id="publish-name" label="Playlist Name" required></sl-input><br />
+                    <sl-textarea id="publish-sources" label="YouTube URLs" placeholder="One URL per line"
+                        required></sl-textarea><br />
+                    <sl-button id="publish-btn">Publish via yt-dlp</sl-button>
+                </div>
+            </sl-tab-panel>
+
+            <!-- Advanced -->
+            <sl-tab-panel name="advanced">
+                <sl-details summary="Dev Status">
+                    <pre id="dev-status"><sl-spinner></sl-spinner></pre>
+                </sl-details>
+                <sl-details summary="Dev State">
+                    <pre id="dev-state"><sl-spinner></sl-spinner></pre>
+                </sl-details>
+                <sl-details summary="Jobs">
+                    <pre id="dev-jobs"><sl-spinner></sl-spinner></pre>
+                </sl-details>
+            </sl-tab-panel>
+        </sl-tab-group>
+    </main>
+
+    <script src="./js/ws.js"></script>
+    <script src="./js/script.js"></script>
+</body>
+
+</html>

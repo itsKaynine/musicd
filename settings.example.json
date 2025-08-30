@@ -1,0 +1,29 @@
+{
+    "environment": "local",
+    "data_dir": "./data",
+    "server": {
+        "host": "0.0.0.0",
+        "port": 8371
+    },
+    "manifest": {
+        "enable": false,
+        "url": "http://localhost:5128/manifest.json",
+        "check_interval_secs": 900
+    },
+    "player": {
+        "auto_play": true,
+        "default_audio_effects": true
+    },
+    "publish": {
+        "auto_set_playlist": false
+    },
+    "job": {
+        "max_late_secs": 10
+    },
+    "downloader": {
+        "default": "yt-dlp",
+        "yt_dlp": {
+            "path": "yt-dlp"
+        }
+    }
+}

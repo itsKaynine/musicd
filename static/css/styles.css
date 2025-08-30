@@ -1,0 +1,212 @@
+@keyframes scroll-text {
+  0% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(0);
+  } /* pause at start */
+  90% {
+    transform: translateX(var(--shift));
+  }
+  100% {
+    transform: translateX(var(--shift));
+  } /* pause at end */
+}
+
+@keyframes scroll-loop {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(var(--shift));
+  }
+}
+
+body {
+  font-family: system-ui, sans-serif;
+}
+
+main {
+  /* max-width: 720px; */
+  margin: 2rem 1.5rem;
+  /* margin: 2rem auto; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
+main.sl-ready {
+  opacity: 1;
+}
+
+:root {
+  --sl-color-primary-50: var(--sl-color-purple-50);
+  --sl-color-primary-100: var(--sl-color-purple-100);
+  --sl-color-primary-200: var(--sl-color-purple-200);
+  --sl-color-primary-300: var(--sl-color-purple-300);
+  --sl-color-primary-400: var(--sl-color-purple-400);
+  --sl-color-primary-500: var(--sl-color-purple-500);
+  --sl-color-primary-600: var(--sl-color-purple-600);
+  --sl-color-primary-700: var(--sl-color-purple-700);
+  --sl-color-primary-800: var(--sl-color-purple-800);
+  --sl-color-primary-900: var(--sl-color-purple-900);
+  --sl-color-primary-950: var(--sl-color-purple-950);
+}
+
+.player-container {
+  display: flex;
+  justify-content: center;
+}
+.player {
+  background-color: #161616;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+  width: 340px;
+  text-align: center;
+}
+.player-info {
+  margin-bottom: 10px;
+}
+
+#track-name-marquee {
+  font-size: 14px;
+  display: inline-flex;
+  gap: 50px;
+  white-space: nowrap;
+  will-change: transform;
+  animation: scrollLoop linear infinite;
+}
+.track-name-container {
+  position: relative;
+  width: 340px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+/* Fade masks */
+.track-name-container::before,
+.track-name-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 30px;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.track-name-container::before {
+  left: 0;
+  background: linear-gradient(to right, #161616, transparent);
+}
+.track-name-container::after {
+  right: 0;
+  background: linear-gradient(to left, #161616, transparent);
+}
+.track-name-container.scrolling::before,
+.track-name-container.scrolling::after {
+  opacity: 1;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+#volume {
+  width: 100%;
+}
+.volume-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.time {
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3px;
+}
+
+.tabs {
+  width: 360px;
+  max-width: 360px;
+}
+.tabs {
+  sl-tab-panel {
+    .tab-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+th,
+td {
+  padding: 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid #2e2e2e;
+}
+td.playlist-actions {
+  display: flex;
+  gap: 3px;
+  text-align: center;
+}
+.current-playlist {
+  font-weight: bold;
+  color: var(--sl-color-primary-600);
+}
+.playlist-tr {
+  cursor: pointer;
+  user-select: none;
+}
+.playlist-menu {
+  padding: 0px;
+}
+.playlist-menu-item-icon {
+  width: 14px;
+}
+.playlist-menu-item-text {
+  font-size: 12px;
+}
+
+.current-track {
+  font-weight: bold;
+  color: var(--sl-color-primary-600);
+}
+.track-tr {
+  cursor: pointer;
+  user-select: none;
+}
+
+.publish-form {
+  sl-input::part(form-control-label),
+  sl-input::part(input) {
+    font-size: 13px;
+  }
+  sl-textarea::part(form-control-label) {
+    font-size: 13px;
+  }
+  sl-textarea::part(textarea) {
+    font-size: 12px;
+    min-height: 180px;
+  }
+}
+#publish-alert {
+  margin-bottom: 10px;
+}
+#publish-alert {
+  span {
+    font-size: 12px;
+  }
+}
