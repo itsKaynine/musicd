@@ -123,7 +123,7 @@ impl Settings {
             .set_default("environment", environment.as_str())?
             .set_default("data_dir", "./data")?
             .set_default("server.host", "0.0.0.0")?
-            .set_default("server.port", 8731)?
+            .set_default("server.port", 8371)?
             .set_default("manifest.enable", false)?
             .set_default("manifest.url", None::<Option<String>>)?
             .set_default("manifest.check_interval_secs", 900)?
