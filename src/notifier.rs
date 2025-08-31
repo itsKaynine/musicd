@@ -11,7 +11,7 @@ pub enum Notification {
     TrackChanged { idx: usize, name: String },
     TrackDurationChanged { duration: Option<Duration> },
     PlaylistChanged { id: String, name: String },
-    PlaylistPublished { id: String },
+    PlaylistPublished { id: String, name: String },
     SeekPositionChanged { duration: Duration },
     VolumeChanged { value: f32 },
     JobsUpdated,

@@ -113,7 +113,10 @@ impl Publisher {
             tracing::info!("Published playlist '{}'", meta.name);
 
             // Notify
-            notifier.notify(Notification::PlaylistPublished { id: meta.id.clone() });
+            notifier.notify(Notification::PlaylistPublished {
+                id: meta.id.clone(),
+                name: meta.name.clone(),
+            });
 
             // Switch current to the new playlist
             if publish_settings.auto_set_playlist {
