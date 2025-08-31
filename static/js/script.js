@@ -219,14 +219,16 @@ function renderPlaylists(playlists) {
       <td>${i + 1}</td>
       <td>${p.meta.name}</td>
       <td class="playlist-actions">
-        <sl-button
-          size="small"
-          circle
-          variant="default"
-          onclick="event.stopPropagation(); setPlaylist('${p.meta.id}', 'queue');"
-        >
-          <sl-icon name="clock"></sl-icon>
-        </sl-button>
+        <sl-tooltip content="Queue Playlist">
+          <sl-button
+            size="small"
+            circle
+            variant="default"
+            onclick="event.stopPropagation(); setPlaylist('${p.meta.id}', 'queue');"
+          >
+            <sl-icon name="clock"></sl-icon>
+          </sl-button>
+        </sl-tooltip>
         <sl-dropdown onclick="event.stopPropagation();">
           <sl-button slot="trigger" size="small" circle variant="default">
             <sl-icon name="three-dots" style="vertical-align: middle;"></sl-icon>
