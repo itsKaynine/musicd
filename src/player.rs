@@ -354,14 +354,28 @@ impl PlayerHandle {
         Ok(Self { inner })
     }
 
-    pub fn set_playlist_dir(&self, p: impl AsRef<Path>, mode: SetPlaylistMode) {
+    pub fn set_playlist_dir(&self, playlist_dir: impl AsRef<Path>, mode: SetPlaylistMode) {
+        let current_dir = {
+            match self.inner.playlist_dir.try_read() {
+                Ok(dir) => dir.clone(),
+                Err(error) => {
+                    tracing::warn!("Failed to obtain playlist_dir lock: {:?}", error);
+                    None
+                }
+            }
+        };
+
         if let Ok(mut dir) = self.inner.playlist_dir.try_write() {
-            *dir = Some(p.as_ref().to_path_buf());
+            let new_dir = playlist_dir.as_ref().to_path_buf();
+            *dir = Some(new_dir.clone());
 
             match mode {
                 SetPlaylistMode::Queue => {}
                 SetPlaylistMode::Skip => {
-                    self.next();
+                    // Only skip track when playlist changed
+                    if current_dir.as_ref().is_some_and(|x| x != &new_dir) {
+                        self.next();
+                    }
                 }
             };
         }
