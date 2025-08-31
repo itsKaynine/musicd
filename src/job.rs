@@ -168,6 +168,14 @@ impl JobManager {
     }
 
     fn load_jobs(&self) -> Vec<Job> {
+        // Skip if file does not exist
+        if !self.file_path.try_exists().unwrap_or_else(|error| {
+            tracing::warn!("Could not check if jobs file exists: {:?}", error);
+            false
+        }) {
+            return Default::default();
+        }
+
         let data = fs::read_to_string(&self.file_path).unwrap_or_default();
         match serde_json::from_str::<Vec<Job>>(&data) {
             Ok(jobs) => jobs,
