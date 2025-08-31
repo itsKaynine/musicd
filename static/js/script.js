@@ -448,6 +448,10 @@ ws.on('message', (event) => {
       break;
     }
     case 'PLAYLIST_PUBLISHED': {
+      const { name } = payload;
+
+      toast(`Playlist ${name} successfully published`);
+
       refreshPlaylist();
       break;
     }
